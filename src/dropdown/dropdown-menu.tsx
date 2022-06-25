@@ -1,18 +1,26 @@
 import { ReactNode, Component } from "react";
+import { TabComponent, TabsComponent } from "../tabs/tabs";
 
 export interface DropdownItem {
     icon: ReactNode;
     text: string;
 }
 
+export interface DropdownTab {
+    title: string;
+    items: DropdownItem[];
+}
+
 export interface DropdownMenuProps {
     isExpanded: boolean;
-    items: DropdownItem[];
+    tabs: DropdownTab[];
 }
 
 export class DropdownMenuComponent extends Component<DropdownMenuProps> {
     constructor(props: DropdownMenuProps) {
         super(props);
+
+        this.renderTab = this.renderTab.bind(this);
     }
 
     render() {
@@ -21,17 +29,23 @@ export class DropdownMenuComponent extends Component<DropdownMenuProps> {
         }
 
         return (
-            <div>
-                <ul>
-                    { this.props.items.map(this.renderLiItem) }
-                </ul>
+            <TabsComponent>
+                { this.props.tabs.map(this.renderTab) }
+            </TabsComponent>
+        );
+    }
+
+    renderTab(tab: DropdownTab, index: number): TabComponent {
+        return (
+            <div className="dropdown-menu" key={index} data-title={tab.title}>
+                <ul className="dropdown-menu-list">{tab.items.map(this.renderLiItem)}</ul>
             </div>
         );
     }
 
     renderLiItem(item: DropdownItem, index: number): ReactNode {
         return (
-            <li key={index}>
+            <li className="dropdown-menu-item" key={index}>
                 { item.icon }
                 { item.text }
             </li>

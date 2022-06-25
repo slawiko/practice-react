@@ -1,8 +1,8 @@
 import React from "react";
-import {DropdownItem, DropdownMenuComponent} from "./dropdown-menu";
+import { DropdownTab, DropdownMenuComponent } from "./dropdown-menu";
 
 export interface DropdownProps {
-    items: DropdownItem[];
+    tabs: DropdownTab[];
     buttonText?: string;
 }
 
@@ -27,11 +27,11 @@ export class DropdownComponent extends React.Component<DropdownProps, DropdownSt
 
     render() {
         return (
-            <div>
-                <button type="button" className="dropdown-button" onClick={this.onClick}>
+            <div className="dropdown">
+                <button className="dropdown-toggle-button" type="button" onClick={this.onClick}>
                     {this.props.buttonText || "Add"}
                 </button>
-                <DropdownMenuComponent items={this.props.items} isExpanded={this.state.expanded}/>
+                <DropdownMenuComponent tabs={this.props.tabs} isExpanded={this.state.expanded}/>
             </div>
         );
     }
