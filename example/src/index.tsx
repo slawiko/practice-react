@@ -1,37 +1,65 @@
 import { createRoot } from "react-dom/client";
-import { DropdownComponent, DropdownItem } from "practice-react";
+import { DropdownComponent, DropdownTab } from "practice-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser } from '@fortawesome/free-solid-svg-icons'
+import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { faInstagram, faShopify } from "@fortawesome/free-brands-svg-icons";
 
 function UserIcon(): JSX.Element {
     return <FontAwesomeIcon icon={faUser}/>;
 }
 
-const items: DropdownItem[] = [
+function InstagramIcon(): JSX.Element {
+    return <FontAwesomeIcon icon={faInstagram} />;
+}
+
+function ShopifyIcon(): JSX.Element {
+    return <FontAwesomeIcon icon={faShopify} />;
+}
+
+const tabs: DropdownTab[] = [
     {
-        icon: <UserIcon/>,
-        text: "Louie Popp",
+        title: 'Users',
+        items: [
+            {
+                icon: <UserIcon/>,
+                text: "Louie Popp",
+            },
+            {
+                icon: <UserIcon/>,
+                text: "Jonas Rafn",
+            },
+            {
+                icon: <UserIcon/>,
+                text: "Fiona Rakipi",
+            },
+            {
+                icon: <UserIcon/>,
+                text: "Martin Navne",
+            },
+            {
+                icon: <UserIcon/>,
+                text: "Kristoffer Degn",
+            },
+        ],
     },
     {
-        icon: <UserIcon/>,
-        text: "Jonas Rafn",
-    },
-    {
-        icon: <UserIcon/>,
-        text: "Fiona Rakipi",
-    },
-    {
-        icon: <UserIcon/>,
-        text: "Martin Navne",
-    },
-    {
-        icon: <UserIcon/>,
-        text: "Kristoffer Degn",
-    },
+        title: 'Integrations',
+        items: [
+            {
+                icon: <InstagramIcon/>,
+                text: "Instagram",
+            },
+            {
+                icon: <ShopifyIcon/>,
+                text: "Shopify",
+            },
+        ],
+    }
 ];
 
+
 function Index(): JSX.Element {
-    return <DropdownComponent items={items} buttonText={"Add Filter"}/>;
+    return <DropdownComponent tabs={tabs} buttonText={"Add Filter"}/>;
 }
 
 const ID = "container";
