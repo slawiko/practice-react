@@ -1,5 +1,7 @@
 import { Component, ReactElement, PropsWithChildren, ReactNode } from "react";
 
+import "./tabs.css";
+
 export interface TabComponentProps extends PropsWithChildren {
     'data-title': string;
 }
@@ -8,6 +10,7 @@ export type TabComponent = ReactElement<TabComponentProps>;
 
 export interface TabsComponentProps extends PropsWithChildren {
     children: TabComponent|TabComponent[];
+    className?: string;
 }
 
 interface TabsComponentState {
@@ -28,13 +31,13 @@ export class TabsComponent extends Component<TabsComponentProps, TabsComponentSt
 
     render(): JSX.Element {
         return (
-            <div className="tabs">
-                <ul className="tabs-titles">
+            <div className={`tabs ${this.props.className || ''}`}>
+                <div className="tabs-titles">
                     { Array.isArray(this.props.children)
                         ? this.props.children.map(this.renderTabTitle)
                         : this.renderTabTitle(this.props.children, 0)
                     }
-                </ul>
+                </div>
                 <div className="tabs-content">
                     { Array.isArray(this.props.children)
                         ? this.props.children.map(this.renderTabContent)
@@ -57,7 +60,7 @@ export class TabsComponent extends Component<TabsComponentProps, TabsComponentSt
 
     renderTabTitle(child: TabComponent, index: number): JSX.Element {
         return (
-            <li className="tab-title" key={index} onClick={() => this.onTabClick(index)}>{child.props["data-title"]}</li>
+            <button className="tab-title" type="button" key={index} onClick={() => this.onTabClick(index)}>{child.props["data-title"]}</button>
         );
     }
 }

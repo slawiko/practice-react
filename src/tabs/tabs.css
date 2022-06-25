@@ -1,0 +1,11 @@
+.tabs-titles {
+    border-style: solid;
+    border-color: #DFDFDF;
+    border-width: 0 0 1px 0;
+}
+
+.tab-title {
+    all: unset;
+    cursor: pointer;
+    padding: 14px 17px;
+}

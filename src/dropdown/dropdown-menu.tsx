@@ -1,6 +1,8 @@
 import { ReactNode, Component } from "react";
 import { TabComponent, TabsComponent } from "../tabs/tabs";
 
+import "./dropdown-menu.css";
+
 export interface DropdownItem {
     icon: ReactNode;
     text: string;
@@ -29,7 +31,7 @@ export class DropdownMenuComponent extends Component<DropdownMenuProps> {
         }
 
         return (
-            <TabsComponent>
+            <TabsComponent className="dropdown-tab">
                 { this.props.tabs.map(this.renderTab) }
             </TabsComponent>
         );

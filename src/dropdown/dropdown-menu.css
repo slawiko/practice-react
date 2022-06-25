@@ -1,0 +1,19 @@
+.dropdown-tab {
+    position: absolute;
+    border: 1px solid #F8F8F8;
+    border-radius: 5px;
+    box-shadow: 0 15px 30px 1px rgba(148,148,148,0.4);
+}
+
+.dropdown-menu {
+    padding-top: 10px;
+}
+
+.dropdown-menu-list {
+    all: unset;
+    list-style: none;
+}
+
+.dropdown-menu-list .dropdown-menu-item {
+    padding: 5px 17px;
+}
