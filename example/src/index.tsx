@@ -1,5 +1,5 @@
-import ReactDOM from 'react-dom';
-import { DropdownComponent } from 'practice-react';
+import { createRoot } from "react-dom/client";
+import { DropdownComponent } from "practice-react";
 
 function Index(): JSX.Element {
     return <p>
@@ -7,5 +7,14 @@ function Index(): JSX.Element {
     </p>;
 }
 
-const container = document.getElementById('container');
-ReactDOM.render(<Index/>, container);
+const ID = "container";
+const container = document.getElementById(ID);
+
+if (!container) {
+    const error = new Error(`#${ID} element was not found`);
+    console.error(error);
+    throw error;
+}
+
+const root = createRoot(container);
+root.render(<Index/>);
