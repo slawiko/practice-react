@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { faInstagram, faShopify } from "@fortawesome/free-brands-svg-icons";
 
+import "./index.css";
+
 function UserIcon(): JSX.Element {
     return <FontAwesomeIcon icon={faUser}/>;
 }
@@ -59,7 +61,11 @@ const tabs: DropdownTab[] = [
 
 
 function Index(): JSX.Element {
-    return <DropdownComponent tabs={tabs} buttonText={"Add Filter"}/>;
+    return (
+        <div id="dropdown">
+            <DropdownComponent tabs={tabs} buttonText={"Add Filter"}/>
+        </div>
+    );
 }
 
 const ID = "container";

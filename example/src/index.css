@@ -1,0 +1,9 @@
+body {
+    font-family: 'Work Sans', sans-serif;
+    color: #9FA2B4;
+}
+
+#dropdown {
+    display: flex;
+    justify-content: center;
+}
