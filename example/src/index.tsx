@@ -1,10 +1,37 @@
 import { createRoot } from "react-dom/client";
-import { DropdownComponent } from "practice-react";
+import { DropdownComponent, DropdownItem } from "practice-react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from '@fortawesome/free-solid-svg-icons'
+
+function UserIcon(): JSX.Element {
+    return <FontAwesomeIcon icon={faUser}/>;
+}
+
+const items: DropdownItem[] = [
+    {
+        icon: <UserIcon/>,
+        text: "Louie Popp",
+    },
+    {
+        icon: <UserIcon/>,
+        text: "Jonas Rafn",
+    },
+    {
+        icon: <UserIcon/>,
+        text: "Fiona Rakipi",
+    },
+    {
+        icon: <UserIcon/>,
+        text: "Martin Navne",
+    },
+    {
+        icon: <UserIcon/>,
+        text: "Kristoffer Degn",
+    },
+];
 
 function Index(): JSX.Element {
-    return <p>
-        <DropdownComponent/>
-    </p>;
+    return <DropdownComponent items={items} buttonText={"Add Filter"}/>;
 }
 
 const ID = "container";
