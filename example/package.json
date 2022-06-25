@@ -3,11 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "source": "index.html",
-  "main": "dist/index.js",
-  "module": "dist/index.modern.js",
   "scripts": {
     "build": "parcel build",
-    "start": "parcel"
+    "start": "parcel serve --port 8080"
   },
   "dependencies": {
     "practice-react": "file:..",
