@@ -15,5 +15,25 @@
 }
 
 .dropdown-menu-list .dropdown-menu-item {
-    padding: 5px 17px;
+    padding: 5px 9px;
+    margin: 0 9px;
+    border-radius: 5px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.dropdown-menu-list .dropdown-menu-item:hover {
+    background-color: #99CC98;
+    color: white;
+    font-weight: 600;
+}
+
+.dropdown-menu-list .dropdown-menu-item:active {
+    background-color: #339933;
+    color: white;
+    font-weight: 600;
+}
+
+.dropdown-menu-list .dropdown-menu-item .dropdown-menu-item-text {
+    margin-left: 10px;
 }

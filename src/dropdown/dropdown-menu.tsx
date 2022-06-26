@@ -49,7 +49,7 @@ export class DropdownMenuComponent extends Component<DropdownMenuProps> {
         return (
             <li className="dropdown-menu-item" key={index}>
                 { item.icon }
-                { item.text }
+                <span className="dropdown-menu-item-text">{ item.text }</span>
             </li>
         );
     }
