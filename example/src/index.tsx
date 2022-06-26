@@ -68,7 +68,7 @@ function Index(): JSX.Element {
     );
 }
 
-const ID = "container";
+const ID = "app";
 const container = document.getElementById(ID);
 
 if (!container) {

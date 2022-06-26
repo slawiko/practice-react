@@ -4,7 +4,11 @@ body {
     font-size: 14px;
 }
 
-#dropdown {
+#container {
     display: flex;
     justify-content: center;
+}
+
+#dropdown {
+    order: 1;
 }
