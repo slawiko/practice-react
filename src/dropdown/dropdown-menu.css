@@ -1,8 +1,10 @@
 .dropdown-tab {
+    line-height: 16px;
     position: absolute;
     border: 1px solid #F8F8F8;
     border-radius: 5px;
     box-shadow: 0 15px 30px 1px rgba(148,148,148,0.4);
+    min-width: 340px;
 }
 
 .dropdown-menu {
