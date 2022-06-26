@@ -2,25 +2,25 @@ import { Component, ReactElement, PropsWithChildren, ReactNode } from "react";
 
 import "./tabs.css";
 
-export interface TabComponentProps extends PropsWithChildren {
+export interface TabProps extends PropsWithChildren {
     'data-title': string;
 }
 
-export type TabComponent = ReactElement<TabComponentProps>;
+export type Tab = ReactElement<TabProps>;
 
-export interface TabsComponentProps extends PropsWithChildren {
-    children: TabComponent|TabComponent[];
+export interface TabsProps extends PropsWithChildren {
+    children: Tab|Tab[];
     className?: string;
 }
 
-interface TabsComponentState {
+interface TabsState {
     activeTab: number;
 }
 
 const ACTIVE_CLASS = 'pr-active';
 
-export class TabsComponent extends Component<TabsComponentProps, TabsComponentState> {
-    constructor(props: TabsComponentProps) {
+export class Tabs extends Component<TabsProps, TabsState> {
+    constructor(props: TabsProps) {
         super(props);
 
         this.state = {
@@ -54,13 +54,13 @@ export class TabsComponent extends Component<TabsComponentProps, TabsComponentSt
         this.setState(() => ({ activeTab: index }));
     }
 
-    renderTabContent(tab: TabComponent, index: number): ReactNode {
+    renderTabContent(tab: Tab, index: number): ReactNode {
         if (this.state.activeTab === index) {
             return tab;
         }
     }
 
-    renderTabTitle(child: TabComponent, index: number): JSX.Element {
+    renderTabTitle(child: Tab, index: number): JSX.Element {
         const className = this.state.activeTab === index ? `tab-title ${ACTIVE_CLASS}` : "tab-title";
         const title = child.props["data-title"];
         return (

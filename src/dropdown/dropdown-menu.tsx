@@ -1,6 +1,6 @@
 import { ReactNode, Component } from "react";
-import { TabComponent, TabsComponent } from "../tabs/tabs";
-import { DropdownSearchComponent } from "./dropdown-search";
+import { Tab, Tabs } from "../tabs/tabs";
+import { DropdownSearch } from "./dropdown-search";
 
 import "./dropdown-menu.css";
 
@@ -25,7 +25,7 @@ interface DropdownMenuState {
 
 const ACTIVE_CLASS = "pr-active";
 
-export class DropdownMenuComponent extends Component<DropdownMenuProps, DropdownMenuState> {
+export class DropdownMenu extends Component<DropdownMenuProps, DropdownMenuState> {
     constructor(props: DropdownMenuProps) {
         super(props);
 
@@ -41,16 +41,16 @@ export class DropdownMenuComponent extends Component<DropdownMenuProps, Dropdown
         }
 
         return (
-            <TabsComponent className="dropdown-tab">
+            <Tabs className="dropdown-tab">
                 { this.props.tabs.map(this.renderTab) }
-            </TabsComponent>
+            </Tabs>
         );
     }
 
-    renderTab(tab: DropdownTab, index: number): TabComponent {
+    renderTab(tab: DropdownTab, index: number): Tab {
         return (
             <div className="dropdown-menu" key={index} data-title={tab.title}>
-                <DropdownSearchComponent/>
+                <DropdownSearch/>
                 <ul className="dropdown-menu-list">{tab.items.map(this.renderItem)}</ul>
             </div>
         );

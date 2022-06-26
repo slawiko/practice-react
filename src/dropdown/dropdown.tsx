@@ -1,5 +1,5 @@
-import React from "react";
-import { DropdownTab, DropdownMenuComponent } from "./dropdown-menu";
+import { Component } from "react";
+import { DropdownTab, DropdownMenu } from "./dropdown-menu";
 
 import "./dropdown.css";
 
@@ -12,7 +12,7 @@ export interface DropdownState {
     expanded: boolean;
 }
 
-export class DropdownComponent extends React.Component<DropdownProps, DropdownState> {
+export class Dropdown extends Component<DropdownProps, DropdownState> {
     constructor(props: DropdownProps) {
         super(props);
 
@@ -33,7 +33,7 @@ export class DropdownComponent extends React.Component<DropdownProps, DropdownSt
                 <button className="dropdown-toggle-button" type="button" onClick={this.onClick}>
                     {this.props.buttonText || "Add"}
                 </button>
-                <DropdownMenuComponent tabs={this.props.tabs} isExpanded={this.state.expanded}/>
+                <DropdownMenu tabs={this.props.tabs} isExpanded={this.state.expanded}/>
             </div>
         );
     }

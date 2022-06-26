@@ -1,5 +1,5 @@
 import { createRoot } from "react-dom/client";
-import { DropdownComponent, DropdownTab } from "practice-react";
+import { Dropdown, DropdownTab } from "practice-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { faInstagram, faShopify } from "@fortawesome/free-brands-svg-icons";
@@ -63,7 +63,7 @@ const tabs: DropdownTab[] = [
 function Index(): JSX.Element {
     return (
         <div id="dropdown">
-            <DropdownComponent tabs={tabs} buttonText={"Add Filter"}/>
+            <Dropdown tabs={tabs} buttonText={"Add Filter"}/>
         </div>
     );
 }
