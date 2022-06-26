@@ -1,6 +1,8 @@
 import React from "react";
 import { DropdownTab, DropdownMenuComponent } from "./dropdown-menu";
 
+import "./dropdown.css";
+
 export interface DropdownProps {
     tabs: DropdownTab[];
     buttonText?: string;
