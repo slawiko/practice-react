@@ -12,3 +12,7 @@ body {
 #dropdown {
     order: 1;
 }
+
+#tags {
+    order: 2;
+}

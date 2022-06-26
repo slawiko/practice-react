@@ -1,5 +1,6 @@
 import { createRoot } from "react-dom/client";
-import { Dropdown, DropdownTab } from "practice-react";
+import { Component, ReactNode } from "react";
+import { Dropdown, DropdownTab, Tag } from "practice-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { faInstagram, faShopify } from "@fortawesome/free-brands-svg-icons";
@@ -59,13 +60,58 @@ const tabs: DropdownTab[] = [
     }
 ];
 
+interface Filter {
+    index: [number, number];
+    value: string;
+}
 
-function Index(): JSX.Element {
-    return (
-        <div id="dropdown">
-            <Dropdown tabs={tabs} buttonText={"Add Filter"}/>
-        </div>
-    );
+interface AppState {
+    filters: Filter[];
+}
+
+function mapItemToFilter(tabIndex: number, itemIndex: number): Filter {
+    const filterValue = `${tabs[tabIndex].title}: ${tabs[tabIndex].items[itemIndex].text}`;
+    return {
+        index: [tabIndex, itemIndex],
+        value: filterValue,
+    };
+}
+
+class Index extends Component<{}, AppState> {
+    constructor(props: {}) {
+        super(props);
+
+        this.state = {
+            filters: []
+        };
+
+        this.onItemClick = this.onItemClick.bind(this);
+        this.renderTag = this.renderTag.bind(this);
+    }
+
+    onItemClick(tabIndex: number, itemIndex: number): void {
+        this.setState((state) => ({
+            filters: [...state.filters, mapItemToFilter(tabIndex, itemIndex)]
+        }));
+    }
+
+    renderTag(filter: Filter): ReactNode {
+        const index = `${filter.index[0]}:${filter.index[1]}`;
+        return <Tag key={index} text={filter.value}/>
+    }
+
+    render() {
+        return (
+            <div id="container">
+                <div id="dropdown">
+                    <Dropdown onItemClick={this.onItemClick} tabs={tabs} buttonText={"Add Filter"}/>
+                </div>
+                <div id="tags">
+                    { this.state.filters.map(this.renderTag) }
+                </div>
+            </div>
+        );
+    }
 }
 
 const ID = "app";
