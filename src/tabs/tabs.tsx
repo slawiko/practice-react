@@ -62,8 +62,9 @@ export class TabsComponent extends Component<TabsComponentProps, TabsComponentSt
 
     renderTabTitle(child: TabComponent, index: number): JSX.Element {
         const className = this.state.activeTab === index ? `tab-title ${ACTIVE_CLASS}` : "tab-title";
+        const title = child.props["data-title"];
         return (
-            <button className={className} type="button" key={index} onClick={() => this.onTabClick(index)}>{child.props["data-title"]}</button>
+            <button data-title={title} className={className} type="button" key={index} onClick={() => this.onTabClick(index)}>{title}</button>
         );
     }
 }

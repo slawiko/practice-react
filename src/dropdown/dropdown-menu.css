@@ -25,12 +25,14 @@
 }
 
 .dropdown-menu-list .dropdown-menu-item:hover {
+    transition: color,background-color 50ms ease-in;
     background-color: #99CC98;
     color: white;
     font-weight: 600;
 }
 
 .dropdown-menu-list .dropdown-menu-item:active {
+    transition: color,background-color 50ms ease-in;
     background-color: #339933;
     color: white;
     font-weight: 600;

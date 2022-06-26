@@ -12,11 +12,23 @@
     margin-bottom: -1px; /* to overlap bottom border */
 }
 
+/* https://twitter.com/hexagoncircle/status/1285234486200934402 */
+.tab-title:after {
+    visibility: hidden;
+    content: attr(data-title);
+    height: 0;
+    font-weight: 600;
+    display: block;
+    overflow: hidden;
+}
+
 .tab-title:hover {
+    transition: color 50ms ease-in;
     color: #4EA64C;
 }
 
 .tab-title.pr-active {
+    transition: color,font-weight 50ms ease-in;
     color: #65B366;
     font-weight: 600;
     border-bottom: 1px solid #65B366;
