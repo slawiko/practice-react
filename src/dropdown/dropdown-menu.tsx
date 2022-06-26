@@ -23,7 +23,7 @@ export interface DropdownMenuProps {
 }
 
 interface DropdownMenuState {
-    activeItem?: number;
+    activeItem?: [tab: number, item: number];
 }
 
 const ACTIVE_CLASS = "pr-active";
@@ -54,13 +54,21 @@ export class DropdownMenu extends Component<DropdownMenuProps, DropdownMenuState
         return (
             <div className="dropdown-menu" key={tabIndex} data-title={tab.title}>
                 <DropdownSearch/>
-                <ul className="dropdown-menu-list">{tab.items.map((item, index) => this.renderItem(item, index, tabIndex))}</ul>
+                <ul className="dropdown-menu-list">{tab.items.map((item, itemIndex) => this.renderItem(item, tabIndex, itemIndex))}</ul>
             </div>
         );
     }
 
-    renderItem(item: DropdownItem, itemIndex: number, tabIndex: number): ReactNode {
-        const className = this.state.activeItem === itemIndex ? `dropdown-menu-item ${ACTIVE_CLASS}` : "dropdown-menu-item";
+    isItemActivated(tabIndex: number, itemIndex: number): boolean {
+        if (!this.state.activeItem) {
+            return false;
+        }
+
+        return this.state.activeItem[0] === tabIndex && this.state.activeItem[1] === itemIndex;
+    }
+
+    renderItem(item: DropdownItem, tabIndex: number, itemIndex: number): ReactNode {
+        const className = this.isItemActivated(tabIndex, itemIndex) ? `dropdown-menu-item ${ACTIVE_CLASS}` : "dropdown-menu-item";
         return (
             <li className={className} key={itemIndex} onClick={() => this.onItemClick(tabIndex, itemIndex)}>
                 { item.icon }
@@ -70,7 +78,7 @@ export class DropdownMenu extends Component<DropdownMenuProps, DropdownMenuState
     }
 
     onItemClick(tabIndex: number, itemIndex: number): void {
-        this.setState(() => ({ activeItem: itemIndex }));
+        this.setState(() => ({ activeItem: [tabIndex, itemIndex] }));
         this.props.onItemClick(tabIndex, itemIndex);
     }
 }
