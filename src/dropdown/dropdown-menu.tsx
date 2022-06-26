@@ -1,5 +1,6 @@
 import { ReactNode, Component } from "react";
 import { TabComponent, TabsComponent } from "../tabs/tabs";
+import { DropdownSearchComponent } from "./dropdown-search";
 
 import "./dropdown-menu.css";
 
@@ -49,6 +50,7 @@ export class DropdownMenuComponent extends Component<DropdownMenuProps, Dropdown
     renderTab(tab: DropdownTab, index: number): TabComponent {
         return (
             <div className="dropdown-menu" key={index} data-title={tab.title}>
+                <DropdownSearchComponent/>
                 <ul className="dropdown-menu-list">{tab.items.map(this.renderItem)}</ul>
             </div>
         );
