@@ -36,6 +36,12 @@
     font-weight: 600;
 }
 
+.dropdown-menu-item.pr-active {
+    background-color: #D4D4D4;
+    color: white;
+    font-weight: 600;
+}
+
 .dropdown-menu-list .dropdown-menu-item .dropdown-menu-item-text {
     margin-left: 10px;
 }

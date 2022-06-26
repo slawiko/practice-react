@@ -17,7 +17,7 @@ interface TabsComponentState {
     activeTab: number;
 }
 
-const ACTIVE_TAB_CLASS = 'pr-active';
+const ACTIVE_CLASS = 'pr-active';
 
 export class TabsComponent extends Component<TabsComponentProps, TabsComponentState> {
     constructor(props: TabsComponentProps) {
@@ -61,7 +61,7 @@ export class TabsComponent extends Component<TabsComponentProps, TabsComponentSt
     }
 
     renderTabTitle(child: TabComponent, index: number): JSX.Element {
-        const className = this.state.activeTab === index ? `tab-title ${ACTIVE_TAB_CLASS}` : "tab-title";
+        const className = this.state.activeTab === index ? `tab-title ${ACTIVE_CLASS}` : "tab-title";
         return (
             <button className={className} type="button" key={index} onClick={() => this.onTabClick(index)}>{child.props["data-title"]}</button>
         );
