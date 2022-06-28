@@ -20,6 +20,9 @@
     "url": "https://github.com/slawiko/practice-react/issues"
   },
   "homepage": "https://github.com/slawiko/practice-react#readme",
+  "dependencies": {
+    "react-click-outsider": "^1.1.1"
+  },
   "peerDependencies": {
     "react": "~18.2.0"
   },

@@ -1,4 +1,5 @@
 import { Component } from "react";
+import ClickOutside from 'react-click-outsider'
 import { DropdownTab, DropdownMenu, DropdownItemClickHandler, ActiveItem } from "./dropdown-menu";
 
 import "./dropdown.css";
@@ -23,26 +24,28 @@ export class Dropdown extends Component<DropdownProps, DropdownState> {
             expanded: false,
         };
 
-        this.onClick = this.onClick.bind(this);
+        this.toggleDropdown = this.toggleDropdown.bind(this);
     }
 
-    onClick(): void {
+    toggleDropdown(): void {
         this.setState((state) => ({ expanded: !state.expanded }));
     }
 
     render() {
         return (
-            <div className="dropdown">
-                <button className="dropdown-toggle-button" type="button" onClick={this.onClick}>
-                    {this.props.buttonText || "Add"}
-                </button>
-                <DropdownMenu tabs={this.props.tabs}
-                              activeItems={this.props.activeItems}
-                              isExpanded={this.state.expanded}
-                              onItemActivate={this.props.onItemActivate}
-                              onItemDeactivate={this.props.onItemDeactivate}
-                />
-            </div>
+            <ClickOutside onClickOutside={this.toggleDropdown}>
+                <div className="dropdown">
+                    <button className="dropdown-toggle-button" type="button" onClick={this.toggleDropdown}>
+                        {this.props.buttonText || "Add"}
+                    </button>
+                    <DropdownMenu tabs={this.props.tabs}
+                                  activeItems={this.props.activeItems}
+                                  isExpanded={this.state.expanded}
+                                  onItemActivate={this.props.onItemActivate}
+                                  onItemDeactivate={this.props.onItemDeactivate}
+                    />
+                </div>
+            </ClickOutside>
         );
     }
 }
