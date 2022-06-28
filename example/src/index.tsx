@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { faInstagram, faShopify } from "@fortawesome/free-brands-svg-icons";
 
+import { ActiveItem } from "../../src/dropdown/dropdown-menu";
 import "./index.css";
 
 function UserIcon(): JSX.Element {
@@ -77,6 +78,10 @@ function mapItemToFilter(tabIndex: number, itemIndex: number): Filter {
     };
 }
 
+function mapFilterToActiveItem(filter: Filter): ActiveItem {
+    return filter.index;
+}
+
 class Index extends Component<{}, AppState> {
     constructor(props: {}) {
         super(props);
@@ -85,13 +90,20 @@ class Index extends Component<{}, AppState> {
             filters: []
         };
 
-        this.onItemClick = this.onItemClick.bind(this);
+        this.onAddFilter = this.onAddFilter.bind(this);
+        this.onRemoveFilter = this.onRemoveFilter.bind(this);
         this.renderTag = this.renderTag.bind(this);
     }
 
-    onItemClick(tabIndex: number, itemIndex: number): void {
+    onAddFilter(tabIndex: number, itemIndex: number): void {
         this.setState((state) => ({
             filters: [...state.filters, mapItemToFilter(tabIndex, itemIndex)]
+        }));
+    }
+
+    onRemoveFilter(tabIndex: number, itemIndex: number): void {
+        this.setState((state) => ({
+            filters: state.filters.filter((filter) => !(filter.index[0] === tabIndex && filter.index[1] === itemIndex))
         }));
     }
 
@@ -104,7 +116,11 @@ class Index extends Component<{}, AppState> {
         return (
             <div id="container">
                 <div id="dropdown">
-                    <Dropdown onItemClick={this.onItemClick} tabs={tabs} buttonText={"Add Filter"}/>
+                    <Dropdown activeItems={this.state.filters.map(mapFilterToActiveItem)}
+                              onItemActivate={this.onAddFilter}
+                              onItemDeactivate={this.onRemoveFilter}
+                              tabs={tabs} buttonText={"Add Filter"}
+                    />
                 </div>
                 <div id="tags">
                     { this.state.filters.map(this.renderTag) }

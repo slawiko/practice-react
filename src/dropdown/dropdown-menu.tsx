@@ -19,20 +19,18 @@ export interface DropdownTab {
 export interface DropdownMenuProps {
     isExpanded: boolean;
     tabs: DropdownTab[];
-    onItemClick: DropdownItemClickHandler;
+    onItemActivate: DropdownItemClickHandler;
+    onItemDeactivate: DropdownItemClickHandler;
+    activeItems?: ActiveItem[];
 }
 
-interface DropdownMenuState {
-    activeItem?: [tab: number, item: number];
-}
+export type ActiveItem = [tabIndex: number, itemIndex: number];
 
 const ACTIVE_CLASS = "pr-active";
 
-export class DropdownMenu extends Component<DropdownMenuProps, DropdownMenuState> {
+export class DropdownMenu extends Component<DropdownMenuProps> {
     constructor(props: DropdownMenuProps) {
         super(props);
-
-        this.state = {};
 
         this.renderTab = this.renderTab.bind(this);
         this.renderItem = this.renderItem.bind(this);
@@ -60,11 +58,11 @@ export class DropdownMenu extends Component<DropdownMenuProps, DropdownMenuState
     }
 
     isItemActivated(tabIndex: number, itemIndex: number): boolean {
-        if (!this.state.activeItem) {
+        if (!this.props.activeItems) {
             return false;
         }
 
-        return this.state.activeItem[0] === tabIndex && this.state.activeItem[1] === itemIndex;
+        return this.props.activeItems.some(([ti, ii]) => ti === tabIndex && ii === itemIndex);
     }
 
     renderItem(item: DropdownItem, tabIndex: number, itemIndex: number): ReactNode {
@@ -78,7 +76,15 @@ export class DropdownMenu extends Component<DropdownMenuProps, DropdownMenuState
     }
 
     onItemClick(tabIndex: number, itemIndex: number): void {
-        this.setState(() => ({ activeItem: [tabIndex, itemIndex] }));
-        this.props.onItemClick(tabIndex, itemIndex);
+        if (!this.props.activeItems) {
+            this.props.onItemActivate(tabIndex, itemIndex);
+            return;
+        }
+
+        if (this.isItemActivated(tabIndex, itemIndex)) {
+            this.props.onItemDeactivate(tabIndex, itemIndex);
+        } else {
+            this.props.onItemActivate(tabIndex, itemIndex);
+        }
     }
 }

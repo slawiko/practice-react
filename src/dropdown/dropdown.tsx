@@ -1,12 +1,14 @@
 import { Component } from "react";
-import { DropdownTab, DropdownMenu, DropdownItemClickHandler } from "./dropdown-menu";
+import { DropdownTab, DropdownMenu, DropdownItemClickHandler, ActiveItem } from "./dropdown-menu";
 
 import "./dropdown.css";
 
 export interface DropdownProps {
     tabs: DropdownTab[];
-    onItemClick: DropdownItemClickHandler;
+    onItemActivate: DropdownItemClickHandler;
+    onItemDeactivate: DropdownItemClickHandler;
     buttonText?: string;
+    activeItems?: ActiveItem[];
 }
 
 export interface DropdownState {
@@ -34,7 +36,12 @@ export class Dropdown extends Component<DropdownProps, DropdownState> {
                 <button className="dropdown-toggle-button" type="button" onClick={this.onClick}>
                     {this.props.buttonText || "Add"}
                 </button>
-                <DropdownMenu tabs={this.props.tabs} isExpanded={this.state.expanded} onItemClick={this.props.onItemClick}/>
+                <DropdownMenu tabs={this.props.tabs}
+                              activeItems={this.props.activeItems}
+                              isExpanded={this.state.expanded}
+                              onItemActivate={this.props.onItemActivate}
+                              onItemDeactivate={this.props.onItemDeactivate}
+                />
             </div>
         );
     }
