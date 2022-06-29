@@ -35,17 +35,36 @@ function findTabIndexById(id: DropdownItemId): number {
 }
 
 class Index extends Component<{}, AppState> {
+    lsKey = 'react-practice-app';
+
     constructor(props: {}) {
         super(props);
 
-        this.state = {
-            filters: []
-        };
+        try {
+            const storedState = localStorage.getItem(this.lsKey);
+            if (storedState) {
+                this.state = JSON.parse(storedState);
+            } else {
+                this.state = {
+                    filters: []
+                };
+            }
+        } catch (e) {
+            this.state = {
+                filters: []
+            };
+        }
 
         this.onAddFilter = this.onAddFilter.bind(this);
         this.onRemoveFilter = this.onRemoveFilter.bind(this);
         this.renderTag = this.renderTag.bind(this);
         this.onCloseTag = this.onCloseTag.bind(this);
+    }
+
+    setState(setter: (prevState: AppState) => AppState): void {
+        const newState = setter(this.state);
+        super.setState(setter);
+        localStorage.setItem(this.lsKey, JSON.stringify(newState));
     }
 
     onAddFilter(tabIndex: number, item: DropdownItem): void {
