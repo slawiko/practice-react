@@ -18,6 +18,7 @@
 }
 
 .dropdown-menu-list .dropdown-menu-item {
+    display: flex;
     padding: 5px 9px;
     margin: 0 9px;
     border-radius: 5px;
@@ -45,6 +46,23 @@
     font-weight: 600;
 }
 
+
 .dropdown-menu-list .dropdown-menu-item .dropdown-menu-item-text {
     margin-left: 10px;
+}
+
+/* icon */
+.dropdown-menu-list .dropdown-menu-item > :first-child {
+    box-shadow: 0 3px 6px 1px rgba(148, 148, 148, 0.3);
+    border-radius: 5px;
+    height: 1rem;
+    width: 1rem;
+}
+
+.dropdown-menu-list .dropdown-menu-item:hover > :first-child {
+    box-shadow: none;
+}
+
+.dropdown-menu-item.pr-active > :first-child {
+    box-shadow: none;
 }

@@ -1,21 +1,14 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
-import { faInstagram, faShopify } from "@fortawesome/free-brands-svg-icons";
+import { DropdownTab } from "practice-react";
 
-import { DropdownTab } from "../../src/dropdown/dropdown-menu";
+import {
+    ActiveCampaignIcon,
+    GoogleAnalyticsIcon,
+    WoocommerceIcon,
+    UserIcon,
+    InstagramIcon,
+    ShopifyIcon
+} from "../icons/icons";
 
-
-function UserIcon(): JSX.Element {
-    return <FontAwesomeIcon icon={faUser}/>;
-}
-
-function InstagramIcon(): JSX.Element {
-    return <FontAwesomeIcon icon={faInstagram}/>;
-}
-
-function ShopifyIcon(): JSX.Element {
-    return <FontAwesomeIcon icon={faShopify}/>;
-}
 
 export const tabs: DropdownTab[] = [
     {
@@ -53,11 +46,26 @@ export const tabs: DropdownTab[] = [
         items: {
             "10": {
                 id: "10",
-                icon: <InstagramIcon/>,
-                text: "Instagram",
+                icon: <ActiveCampaignIcon/>,
+                text: "ActiveCampaign",
             },
             "11": {
                 id: "11",
+                icon: <GoogleAnalyticsIcon/>,
+                text: "Google Analytics",
+            },
+            "12": {
+                id: "12",
+                icon: <InstagramIcon/>,
+                text: "Instagram",
+            },
+            "13": {
+                id: "13",
+                icon: <WoocommerceIcon/>,
+                text: "Woocommerce",
+            },
+            "14": {
+                id: "14",
                 icon: <ShopifyIcon/>,
                 text: "Shopify",
             },
