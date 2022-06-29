@@ -2,7 +2,7 @@
     position: absolute;
     border: 1px solid #F8F8F8;
     border-radius: 5px;
-    box-shadow: 0 15px 30px 1px rgba(148,148,148,0.4);
+    box-shadow: 0 15px 30px 1px rgba(148, 148, 148, 0.4);
     min-width: 340px;
 }
 
@@ -26,14 +26,14 @@
 }
 
 .dropdown-menu-list .dropdown-menu-item:hover {
-    transition: color,background-color 50ms ease-in;
+    transition: color, background-color 50ms ease-in;
     background-color: #99CC98;
     color: white;
     font-weight: 600;
 }
 
 .dropdown-menu-list .dropdown-menu-item:active {
-    transition: color,background-color 50ms ease-in;
+    transition: color, background-color 50ms ease-in;
     background-color: #339933;
     color: white;
     font-weight: 600;

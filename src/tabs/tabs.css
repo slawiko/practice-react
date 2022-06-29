@@ -29,7 +29,7 @@
 }
 
 .tab-title.pr-active {
-    transition: color,font-weight 50ms ease-in;
+    transition: color, font-weight 50ms ease-in;
     color: #65B366;
     font-weight: 600;
     border-bottom: 1px solid #65B366;

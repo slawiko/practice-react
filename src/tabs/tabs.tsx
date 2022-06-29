@@ -3,13 +3,13 @@ import { Component, ReactElement, PropsWithChildren, ReactNode } from "react";
 import "./tabs.css";
 
 export interface TabProps extends PropsWithChildren {
-    'data-title': string;
+    "data-title": string;
 }
 
 export type Tab = ReactElement<TabProps>;
 
 export interface TabsProps extends PropsWithChildren {
-    children: Tab|Tab[];
+    children: Tab | Tab[];
     className?: string;
 }
 
@@ -17,7 +17,7 @@ interface TabsState {
     activeTab: number;
 }
 
-const ACTIVE_CLASS = 'pr-active';
+const ACTIVE_CLASS = "pr-active";
 
 export class Tabs extends Component<TabsProps, TabsState> {
     constructor(props: TabsProps) {
@@ -25,7 +25,7 @@ export class Tabs extends Component<TabsProps, TabsState> {
 
         this.state = {
             activeTab: 0,
-        }
+        };
 
         this.renderTabTitle = this.renderTabTitle.bind(this);
         this.renderTabContent = this.renderTabContent.bind(this);
@@ -33,15 +33,15 @@ export class Tabs extends Component<TabsProps, TabsState> {
 
     render(): JSX.Element {
         return (
-            <div className={`tabs ${this.props.className || ''}`}>
+            <div className={`tabs ${this.props.className || ""}`}>
                 <div className="tabs-titles">
-                    { Array.isArray(this.props.children)
+                    {Array.isArray(this.props.children)
                         ? this.props.children.map(this.renderTabTitle)
                         : this.renderTabTitle(this.props.children, 0)
                     }
                 </div>
                 <div className="tabs-content">
-                    { Array.isArray(this.props.children)
+                    {Array.isArray(this.props.children)
                         ? this.props.children.map(this.renderTabContent)
                         : this.props.children
                     }
@@ -51,7 +51,7 @@ export class Tabs extends Component<TabsProps, TabsState> {
     }
 
     onTabClick(index: number): void {
-        this.setState(() => ({ activeTab: index }));
+        this.setState(() => ({activeTab: index}));
     }
 
     renderTabContent(tab: Tab, index: number): ReactNode {
@@ -64,7 +64,8 @@ export class Tabs extends Component<TabsProps, TabsState> {
         const className = this.state.activeTab === index ? `tab-title ${ACTIVE_CLASS}` : "tab-title";
         const title = child.props["data-title"];
         return (
-            <button data-title={title} className={className} type="button" key={index} onClick={() => this.onTabClick(index)}>{title}</button>
+            <button data-title={title} className={className} type="button" key={index}
+                    onClick={() => this.onTabClick(index)}>{title}</button>
         );
     }
 }

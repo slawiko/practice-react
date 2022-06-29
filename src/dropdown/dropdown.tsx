@@ -1,6 +1,6 @@
 import { Component } from "react";
-import ClickOutside from 'react-click-outsider'
-import { DropdownTab, DropdownMenu, DropdownItemClickHandler, ActiveItem } from "./dropdown-menu";
+import ClickOutside from "react-click-outsider";
+import { DropdownTab, DropdownMenu, DropdownItemClickHandler, DropdownItemId } from "./dropdown-menu";
 
 import "./dropdown.css";
 
@@ -28,7 +28,7 @@ export class Dropdown extends Component<DropdownProps, DropdownState> {
     }
 
     toggleDropdown(): void {
-        this.setState((state) => ({ expanded: !state.expanded }));
+        this.setState((state) => ({expanded: !state.expanded}));
     }
 
     render() {
