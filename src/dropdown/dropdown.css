@@ -1,7 +1,3 @@
-.dropdown {
-    line-height: 16px;
-}
-
 .dropdown .dropdown-toggle-button {
     all: unset;
     user-select: none;

@@ -1,7 +1,7 @@
 body {
     font-family: 'Work Sans', sans-serif;
-    color: #9FA2B4;
     font-size: 14px;
+    line-height: 16px;
 }
 
 #container {
@@ -10,9 +10,16 @@ body {
 }
 
 #dropdown {
+    width: 350px;
+    color: #9FA2B4;
     order: 1;
 }
 
 #tags {
+    width: 300px;
     order: 2;
+}
+
+.custom-tag {
+    margin: 0 10px 10px 0;
 }
