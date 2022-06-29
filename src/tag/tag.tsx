@@ -1,5 +1,7 @@
 import { Component } from "react";
 
+import "./tag.css";
+
 export interface TagProps {
     id: string;
     text: string;

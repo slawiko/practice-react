@@ -1,0 +1,44 @@
+.tag {
+    display: inline-block;
+    border-radius: 50px;
+    background-color: #F1F5F5;
+    padding: 5px 10px;
+    position: relative;
+}
+
+.tag-text {
+    padding-right: 14px;
+}
+
+/* https://css.gg/close */
+.tag-close-button {
+    all: unset;
+    cursor: pointer;
+    border: 1px solid #9FB4B4;
+    border-radius: 50px;
+    box-sizing: border-box;
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    width: 14px;
+    height: 14px;
+}
+
+.tag-close-button::after,
+.tag-close-button::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    width: 8px;
+    height: 2px;
+    background: #9FB4B4;
+    transform: rotate(45deg);
+    border-radius: 5px;
+    left: 2px;
+    top: 5px;
+}
+
+.tag-close-button::after {
+    transform: rotate(-45deg)
+}
