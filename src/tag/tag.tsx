@@ -1,13 +1,19 @@
 import { Component } from "react";
 
 export interface TagProps {
+    id: string;
     text: string;
+    onCloseTag: (id: string) => void;
+    className?: string;
 }
 
 export class Tag extends Component<TagProps> {
     render() {
         return (
-            <button type="button">{this.props.text}</button>
+            <div className={`tag ${this.props.className}`}>
+                <span className="tag-text">{this.props.text}</span>
+                <button className="tag-close-button" onClick={() => this.props.onCloseTag(this.props.id)} type="button"></button>
+            </div>
         );
     }
 }

@@ -69,7 +69,7 @@ const tabs: DropdownTab[] = [
 ];
 
 interface Filter {
-    id: DropdownItemId;
+    itemId: DropdownItemId;
     value: string;
 }
 
@@ -80,9 +80,19 @@ interface AppState {
 function mapItemToFilter(tabIndex: number, item: DropdownItem): Filter {
     const filterValue = `${tabs[tabIndex].title}: ${item.text}`;
     return {
-        id: item.id,
+        itemId: item.id,
         value: filterValue,
     };
+}
+
+function findTabIndexById(id: DropdownItemId): number {
+    for (let i = 0; i < tabs.length; i++) {
+        const tab = tabs[i];
+        if (tab.items[id]) {
+            return i;
+        }
+    }
+    return -1;
 }
 
 class Index extends Component<{}, AppState> {
@@ -96,6 +106,7 @@ class Index extends Component<{}, AppState> {
         this.onAddFilter = this.onAddFilter.bind(this);
         this.onRemoveFilter = this.onRemoveFilter.bind(this);
         this.renderTag = this.renderTag.bind(this);
+        this.onCloseTag = this.onCloseTag.bind(this);
     }
 
     onAddFilter(tabIndex: number, item: DropdownItem): void {
@@ -106,22 +117,32 @@ class Index extends Component<{}, AppState> {
 
     onRemoveFilter(tabIndex: number, item: DropdownItem): void {
         this.setState((state) => ({
-            filters: state.filters.filter((filter) => filter.id !== item.id)
+            filters: state.filters.filter((filter) => filter.itemId !== item.id)
         }));
     }
 
+    onCloseTag(id: DropdownItemId): void {
+        const tabIndex = findTabIndexById(id);
+        if (tabIndex === -1) {
+            return;
+        }
+
+        this.onRemoveFilter(tabIndex, tabs[tabIndex].items[id]);
+    }
+
     renderTag(filter: Filter): ReactNode {
-        return <Tag key={filter.id} text={filter.value}/>;
+        return <Tag className="custom-tag" onCloseTag={this.onCloseTag} id={filter.itemId} key={filter.itemId} text={filter.value}/>;
     }
 
     render() {
         return (
             <div id="container">
                 <div id="dropdown">
-                    <Dropdown activeItems={this.state.filters.map(filter => filter.id)}
+                    <Dropdown activeItems={this.state.filters.map(filter => filter.itemId)}
                               onItemActivate={this.onAddFilter}
                               onItemDeactivate={this.onRemoveFilter}
-                              tabs={tabs} buttonText={"Add Filter"}
+                              tabs={tabs}
+                              buttonText={"Add Filter"}
                     />
                 </div>
                 <div id="tags">
