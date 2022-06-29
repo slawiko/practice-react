@@ -25,15 +25,20 @@ export class Dropdown extends Component<DropdownProps, DropdownState> {
         };
 
         this.toggleDropdown = this.toggleDropdown.bind(this);
+        this.collapseDropdown = this.collapseDropdown.bind(this);
     }
 
     toggleDropdown(): void {
         this.setState((state) => ({expanded: !state.expanded}));
     }
 
+    collapseDropdown(): void {
+        this.setState({expanded: false});
+    }
+
     render() {
         return (
-            <ClickOutside onClickOutside={this.toggleDropdown}>
+            <ClickOutside onClickOutside={this.collapseDropdown}>
                 <div className="dropdown">
                     <button className="dropdown-toggle-button" type="button" onClick={this.toggleDropdown}>
                         {this.props.buttonText || "Add"}
