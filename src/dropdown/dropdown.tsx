@@ -38,19 +38,19 @@ export class Dropdown extends Component<DropdownProps, DropdownState> {
 
     render() {
         return (
-            <ClickOutside onClickOutside={this.collapseDropdown}>
-                <div className="dropdown">
-                    <button className="dropdown-toggle-button" type="button" onClick={this.toggleDropdown}>
-                        {this.props.buttonText || "Add"}
-                    </button>
+            <div className="dropdown">
+                <button className="dropdown-toggle-button" type="button" onClick={this.toggleDropdown}>
+                    {this.props.buttonText || "Add"}
+                </button>
+                <ClickOutside onClickOutside={this.collapseDropdown}>
                     <DropdownMenu tabs={this.props.tabs}
                                   activeItems={this.props.activeItems}
                                   isExpanded={this.state.expanded}
                                   onItemActivate={this.props.onItemActivate}
                                   onItemDeactivate={this.props.onItemDeactivate}
                     />
-                </div>
-            </ClickOutside>
+                </ClickOutside>
+            </div>
         );
     }
 }
