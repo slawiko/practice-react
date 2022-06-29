@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { faInstagram, faShopify } from "@fortawesome/free-brands-svg-icons";
 
-import { ActiveItem } from "../../src/dropdown/dropdown-menu";
+import { DropdownItem, DropdownItemId } from "../../src/dropdown/dropdown-menu";
 import "./index.css";
 
 function UserIcon(): JSX.Element {
@@ -13,56 +13,63 @@ function UserIcon(): JSX.Element {
 }
 
 function InstagramIcon(): JSX.Element {
-    return <FontAwesomeIcon icon={faInstagram} />;
+    return <FontAwesomeIcon icon={faInstagram}/>;
 }
 
 function ShopifyIcon(): JSX.Element {
-    return <FontAwesomeIcon icon={faShopify} />;
+    return <FontAwesomeIcon icon={faShopify}/>;
 }
 
 const tabs: DropdownTab[] = [
     {
-        title: 'Users',
-        items: [
-            {
+        title: "Users",
+        items: {
+            "00": {
+                id: "00",
                 icon: <UserIcon/>,
                 text: "Louie Popp",
             },
-            {
+            "01": {
+                id: "01",
                 icon: <UserIcon/>,
                 text: "Jonas Rafn",
             },
-            {
+            "02": {
+                id: "02",
                 icon: <UserIcon/>,
                 text: "Fiona Rakipi",
             },
-            {
+            "03": {
+                id: "03",
                 icon: <UserIcon/>,
                 text: "Martin Navne",
             },
-            {
+            "04": {
+                id: "04",
                 icon: <UserIcon/>,
                 text: "Kristoffer Degn",
             },
-        ],
+        },
     },
     {
-        title: 'Integrations',
-        items: [
-            {
+        title: "Integrations",
+        items: {
+            "10": {
+                id: "10",
                 icon: <InstagramIcon/>,
                 text: "Instagram",
             },
-            {
+            "11": {
+                id: "11",
                 icon: <ShopifyIcon/>,
                 text: "Shopify",
             },
-        ],
+        },
     }
 ];
 
 interface Filter {
-    index: [number, number];
+    id: DropdownItemId;
     value: string;
 }
 
@@ -70,16 +77,12 @@ interface AppState {
     filters: Filter[];
 }
 
-function mapItemToFilter(tabIndex: number, itemIndex: number): Filter {
-    const filterValue = `${tabs[tabIndex].title}: ${tabs[tabIndex].items[itemIndex].text}`;
+function mapItemToFilter(tabIndex: number, item: DropdownItem): Filter {
+    const filterValue = `${tabs[tabIndex].title}: ${item.text}`;
     return {
-        index: [tabIndex, itemIndex],
+        id: item.id,
         value: filterValue,
     };
-}
-
-function mapFilterToActiveItem(filter: Filter): ActiveItem {
-    return filter.index;
 }
 
 class Index extends Component<{}, AppState> {
@@ -95,35 +98,34 @@ class Index extends Component<{}, AppState> {
         this.renderTag = this.renderTag.bind(this);
     }
 
-    onAddFilter(tabIndex: number, itemIndex: number): void {
+    onAddFilter(tabIndex: number, item: DropdownItem): void {
         this.setState((state) => ({
-            filters: [...state.filters, mapItemToFilter(tabIndex, itemIndex)]
+            filters: [...state.filters, mapItemToFilter(tabIndex, item)]
         }));
     }
 
-    onRemoveFilter(tabIndex: number, itemIndex: number): void {
+    onRemoveFilter(tabIndex: number, item: DropdownItem): void {
         this.setState((state) => ({
-            filters: state.filters.filter((filter) => !(filter.index[0] === tabIndex && filter.index[1] === itemIndex))
+            filters: state.filters.filter((filter) => filter.id !== item.id)
         }));
     }
 
     renderTag(filter: Filter): ReactNode {
-        const index = `${filter.index[0]}:${filter.index[1]}`;
-        return <Tag key={index} text={filter.value}/>
+        return <Tag key={filter.id} text={filter.value}/>;
     }
 
     render() {
         return (
             <div id="container">
                 <div id="dropdown">
-                    <Dropdown activeItems={this.state.filters.map(mapFilterToActiveItem)}
+                    <Dropdown activeItems={this.state.filters.map(filter => filter.id)}
                               onItemActivate={this.onAddFilter}
                               onItemDeactivate={this.onRemoveFilter}
                               tabs={tabs} buttonText={"Add Filter"}
                     />
                 </div>
                 <div id="tags">
-                    { this.state.filters.map(this.renderTag) }
+                    {this.state.filters.map(this.renderTag)}
                 </div>
             </div>
         );

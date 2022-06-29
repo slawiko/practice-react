@@ -9,7 +9,7 @@ export interface DropdownProps {
     onItemActivate: DropdownItemClickHandler;
     onItemDeactivate: DropdownItemClickHandler;
     buttonText?: string;
-    activeItems?: ActiveItem[];
+    activeItems?: DropdownItemId[];
 }
 
 export interface DropdownState {

@@ -4,16 +4,21 @@ import { DropdownSearch } from "./dropdown-search";
 
 import "./dropdown-menu.css";
 
+export type DropdownItemId = string;
+
 export interface DropdownItem {
+    id: DropdownItemId;
     icon: ReactNode;
     text: string;
 }
 
-export type DropdownItemClickHandler = (tabIndex: number, itemIndex: number) => void;
+export type DropdownItemClickHandler = (tab: number, item: DropdownItem) => void;
 
 export interface DropdownTab {
     title: string;
-    items: DropdownItem[];
+    items: {
+        [key: DropdownItemId]: DropdownItem
+    };
 }
 
 export interface DropdownMenuProps {
@@ -21,19 +26,29 @@ export interface DropdownMenuProps {
     tabs: DropdownTab[];
     onItemActivate: DropdownItemClickHandler;
     onItemDeactivate: DropdownItemClickHandler;
-    activeItems?: ActiveItem[];
+    activeItems?: DropdownItemId[];
 }
 
-export type ActiveItem = [tabIndex: number, itemIndex: number];
+interface DropdownMenuState {
+    searchValue: string;
+}
 
 const ACTIVE_CLASS = "pr-active";
 
-export class DropdownMenu extends Component<DropdownMenuProps> {
+export class DropdownMenu extends Component<DropdownMenuProps, DropdownMenuState> {
     constructor(props: DropdownMenuProps) {
         super(props);
 
+        this.state = {
+            searchValue: "",
+        };
+
         this.renderTab = this.renderTab.bind(this);
         this.renderItem = this.renderItem.bind(this);
+    }
+
+    filterItems(tabIndex: number, search: string): void {
+        this.setState(() => ({ searchValue: search.toLowerCase() }));
     }
 
     render() {
@@ -49,42 +64,43 @@ export class DropdownMenu extends Component<DropdownMenuProps> {
     }
 
     renderTab(tab: DropdownTab, tabIndex: number): Tab {
+        const filteredItems = Object.values(tab.items).filter(item => item.text.toLowerCase().includes(this.state.searchValue));
         return (
             <div className="dropdown-menu" key={tabIndex} data-title={tab.title}>
-                <DropdownSearch/>
-                <ul className="dropdown-menu-list">{tab.items.map((item, itemIndex) => this.renderItem(item, tabIndex, itemIndex))}</ul>
+                <DropdownSearch onSearch={this.filterItems.bind(this, tabIndex)}/>
+                <ul className="dropdown-menu-list">{filteredItems.map(item => this.renderItem(tabIndex, item))}</ul>
             </div>
         );
     }
 
-    isItemActivated(tabIndex: number, itemIndex: number): boolean {
+    isItemActivated(item: DropdownItem): boolean {
         if (!this.props.activeItems) {
             return false;
         }
 
-        return this.props.activeItems.some(([ti, ii]) => ti === tabIndex && ii === itemIndex);
+        return this.props.activeItems.some(id => id === item.id);
     }
 
-    renderItem(item: DropdownItem, tabIndex: number, itemIndex: number): ReactNode {
-        const className = this.isItemActivated(tabIndex, itemIndex) ? `dropdown-menu-item ${ACTIVE_CLASS}` : "dropdown-menu-item";
+    renderItem(tabIndex: number, item: DropdownItem): ReactNode {
+        const className = this.isItemActivated(item) ? `dropdown-menu-item ${ACTIVE_CLASS}` : "dropdown-menu-item";
         return (
-            <li className={className} key={itemIndex} onClick={() => this.onItemClick(tabIndex, itemIndex)}>
+            <li className={className} key={item.id} onClick={() => this.onItemClick(tabIndex, item)}>
                 { item.icon }
                 <span className="dropdown-menu-item-text">{ item.text }</span>
             </li>
         );
     }
 
-    onItemClick(tabIndex: number, itemIndex: number): void {
+    onItemClick(tabIndex: number, item: DropdownItem): void {
         if (!this.props.activeItems) {
-            this.props.onItemActivate(tabIndex, itemIndex);
+            this.props.onItemActivate(tabIndex, item);
             return;
         }
 
-        if (this.isItemActivated(tabIndex, itemIndex)) {
-            this.props.onItemDeactivate(tabIndex, itemIndex);
+        if (this.isItemActivated(item)) {
+            this.props.onItemDeactivate(tabIndex, item);
         } else {
-            this.props.onItemActivate(tabIndex, itemIndex);
+            this.props.onItemActivate(tabIndex, item);
         }
     }
 }
