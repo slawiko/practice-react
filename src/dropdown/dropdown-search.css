@@ -1,13 +1,28 @@
 .dropdown-search {
-    all: unset;
+    position: relative;
     margin: 0 18px 10px 18px;
-    padding: 10px;
+    display: flex;
+}
+
+.dropdown-search-input {
+    padding: 10px 10px 10px 36px;
+    all: unset;
     border: 1px solid #DEDEDE;
     border-radius: 5px;
     flex: 1;
 }
 
-.dropdown-search:hover {
+.dropdown-search-input:hover {
     transition: border-color 50ms ease-in;
     border-color: #9FB4B4;
+}
+
+.dropdown-search-magnifier-icon {
+    position: absolute;
+    top: 13px;
+    left: 13px;
+    width: 15px;
+    height: 15px;
+    stroke: #818181;
+    fill: #818181;
 }
