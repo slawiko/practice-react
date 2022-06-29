@@ -20,6 +20,6 @@ body {
     order: 2;
 }
 
-.custom-tag {
+#tags > * {
     margin: 0 10px 10px 0;
 }

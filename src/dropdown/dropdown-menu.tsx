@@ -1,6 +1,8 @@
 import { ReactNode, Component } from "react";
+
 import { Tab, Tabs } from "../tabs/tabs";
 import { DropdownSearch } from "./dropdown-search";
+import { ACTIVE_CLASS } from "../constants";
 
 import "./dropdown-menu.css";
 
@@ -33,8 +35,6 @@ interface DropdownMenuState {
     searchValue: string;
 }
 
-const ACTIVE_CLASS = "pr-active";
-
 export class DropdownMenu extends Component<DropdownMenuProps, DropdownMenuState> {
     constructor(props: DropdownMenuProps) {
         super(props);
@@ -48,7 +48,7 @@ export class DropdownMenu extends Component<DropdownMenuProps, DropdownMenuState
     }
 
     filterItems(tabIndex: number, search: string): void {
-        this.setState(() => ({ searchValue: search.toLowerCase() }));
+        this.setState(() => ({searchValue: search.toLowerCase()}));
     }
 
     render() {
@@ -58,7 +58,7 @@ export class DropdownMenu extends Component<DropdownMenuProps, DropdownMenuState
 
         return (
             <Tabs className="dropdown-tab">
-                { this.props.tabs.map(this.renderTab) }
+                {this.props.tabs.map(this.renderTab)}
             </Tabs>
         );
     }
@@ -85,8 +85,8 @@ export class DropdownMenu extends Component<DropdownMenuProps, DropdownMenuState
         const className = this.isItemActivated(item) ? `dropdown-menu-item ${ACTIVE_CLASS}` : "dropdown-menu-item";
         return (
             <li className={className} key={item.id} onClick={() => this.onItemClick(tabIndex, item)}>
-                { item.icon }
-                <span className="dropdown-menu-item-text">{ item.text }</span>
+                {item.icon}
+                <span className="dropdown-menu-item-text">{item.text}</span>
             </li>
         );
     }

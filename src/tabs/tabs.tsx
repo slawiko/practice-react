@@ -1,5 +1,7 @@
 import { Component, ReactElement, PropsWithChildren, ReactNode } from "react";
 
+import { ACTIVE_CLASS } from "../constants";
+
 import "./tabs.css";
 
 export interface TabProps extends PropsWithChildren {
@@ -16,8 +18,6 @@ export interface TabsProps extends PropsWithChildren {
 interface TabsState {
     activeTab: number;
 }
-
-const ACTIVE_CLASS = "pr-active";
 
 export class Tabs extends Component<TabsProps, TabsState> {
     constructor(props: TabsProps) {
